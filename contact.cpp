@@ -1,65 +1,9 @@
 #include "contact.h"
 
-Contact::Contact(char *main, char* detail)
+std::string Contact::computePadLength(AttrType attribute)
 {
-	ptr = &main[NAME_OFF];
-	deleted = *ptr == 0x00 ? true : false;
-	name = alt_read(ptr);
-	tel = &main[TEL_OFF+deleted];
-	if (!deleted) {
-		home = &detail[HOME_OFF];
-		ptr = &detail[ORG_OFF];
-		org = alt_read(ptr);
-		mail = &detail[MAIL_OFF];
-		work = &detail[WORK_OFF];
-		fax = &detail[FAX_OFF];
-	}
-
-}
-
-Contact::~Contact()
-{
-}
-
-std::string Contact::getName()
-{
-	std::string pad;
-	pad = name.length() < 8 ? "\t" : "";
-	return name + pad;
-}
-
-std::string Contact::getNumber()
-{
-	std::string pad;
-	pad = tel.length() < 8 ? "\t" : "";
-	return tel + pad;
-}
-
-std::string Contact::getFax()
-{
-	std::string pad;
-	pad = fax.length() < 8 ? "\t" : "";
-	return fax + pad;
-}
-
-std::string Contact::getHome()
-{
-	std::string pad;
-	pad = home.length() < 8 ? "\t" : "";
-	return home + pad;
-}
-
-std::string Contact::getWork()
-{
-	std::string pad;
-	pad = work.length() < 8 ? "\t" : "";
-	return work + pad;
-}
-
-std::string Contact::getMail()
-{
-	std::string pad="";
-	switch (int(mail.length()/8))
+	std::string pad = "";
+	switch (int(attributes[(int)attribute].length() / 8))
 	{
 	case 0:
 		pad += "\t";
@@ -69,17 +13,40 @@ std::string Contact::getMail()
 	default:
 		break;
 	}
-	return mail + pad;
+	return pad;
 }
 
-std::string Contact::getOrg()
+Contact::Contact(char *main, char* detail)
 {
-	std::string pad;
-	pad = org.length() < 8 ? "\t" : "";
-	return org + pad;
+	ptr = &main[NAME_OFF];
+	deleted = *ptr == 0x00 ? true : false;
+	attributes[(int)AttrType::Name] = alt_read(ptr);
+	attributes[(int)AttrType::Tel] = &main[TEL_OFF+deleted];
+	if (!deleted) {
+		attributes[(int)AttrType::Home] = &detail[HOME_OFF];
+		ptr = &detail[ORG_OFF];
+		attributes[(int)AttrType::Org] = alt_read(ptr);
+		attributes[(int)AttrType::Email] = &detail[MAIL_OFF];
+		attributes[(int)AttrType::Work] = &detail[WORK_OFF];
+		attributes[(int)AttrType::Fax] = &detail[FAX_OFF];
+	}
+
 }
 
-std::string Contact::getDel()
+Contact::~Contact()
 {
-	return deleted ? "Yes" : "" ;
+}
+
+
+std::string Contact::getAttr(AttrType attribute)
+{
+	if (attribute == AttrType::Deleted) {
+		return deleted ? "Yes" : "";
+	}
+	else
+	{
+		std::string pad = computePadLength(attribute);
+		return attributes[(int)attribute] + pad;
+	}
+	
 }

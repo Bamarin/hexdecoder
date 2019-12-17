@@ -14,29 +14,30 @@
 #define MAIL_OFF 84
 #define ORG_OFF 42
 
+enum class AttrType : uint8_t
+{
+	Name = 0,
+	Tel,
+	Fax,
+	Home,
+	Work,
+	Email,
+	Org,
+	Deleted
+};
+
 class Contact : public alternread
 {
 	char *record;
 	char *ptr;
-	std::string name;
-	std::string tel;
-	std::string fax;
-	std::string home;
-	std::string work;
-	std::string mail;
-	std::string org;
 	bool deleted;
+	std::string attributes [8];
+	std::string computePadLength(AttrType attribute);
 
 public:
 	Contact(char *main, char *detail);
 	~Contact();
-	std::string getName();
-	std::string getNumber();
-	std::string getFax();
-	std::string getHome();
-	std::string getWork();
-	std::string getMail();
-	std::string getOrg();
-	std::string getDel();
+
+	std::string getAttr(AttrType attribute);
 };
 

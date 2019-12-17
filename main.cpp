@@ -49,14 +49,14 @@ int main(int argc, char* argv[])
 		while (p_main.read(main_rec, MAIN_L) && p_data.read(data_rec,DATA_L) && main_rec[MAIN_L-1] != 0x00)
 		{
 			contRec = new Contact(main_rec, data_rec);
-			txt << contRec->getName() << "\t"
-				<< contRec->getNumber() << "\t"
-				<< contRec->getFax() << "\t"
-				<< contRec->getHome() << "\t"
-				<< contRec->getWork() << "\t"
-				<< contRec->getMail() << "\t"
-				<< contRec->getOrg() << "\t"
-				<< contRec->getDel()
+			txt << contRec->getAttr(AttrType::Name)
+				<< contRec->getAttr(AttrType::Tel)
+				<< contRec->getAttr(AttrType::Fax)
+				<< contRec->getAttr(AttrType::Home)
+				<< contRec->getAttr(AttrType::Work)
+				<< contRec->getAttr(AttrType::Email) << "\t"
+				<< contRec->getAttr(AttrType::Org)
+				<< contRec->getAttr(AttrType::Deleted)
 				<< endl;
 			delete contRec;
 		}
