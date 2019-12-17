@@ -1,5 +1,5 @@
+#include <sstream>  
 #include "call.h"
-
 
 void Call::setRecipient()
 {
@@ -11,46 +11,67 @@ void Call::setRecipient()
 	}
 }
 
+void Call::typeToString()
+{
+	
+}
+
 Call::Call(char * record, int length)
 {
 	type = (CallType)record[TYPE_OFF];
+	this->typeToString();
 	number = &record[NUM_OFF];
 	to = &record[TO_OFF];
-	setRecipient();
-	duration = long(&record[DUR_OFF]);
+	this->setRecipient();
+	duration = record[DUR_OFF];
 }
 
 Call::~Call()
 {
 }
 
-std::string Call::getRecord()
+std::string Call::getType()
 {
-	std::string out;
-
-	switch (type)
+	switch (this->type)
 	{
 	case CallType::Dialed:
-		out.append("Dialed\t\t");
-		break;
+		return "Dialed\t\t";
 	case CallType::Received:
-		out.append("Received\t");
-		break;
+		return "Received\t";
 	case CallType::Missed:
-		out.append("Missed\t\t");
-		break;
+		return "Missed\t\t";
 	default:
-		break;
+		return "Undef.\t\t";
 	}
+}
+
+std::string Call::getNumber()
+{
+	std::string ret;
 
 	if (type == CallType::Dialed) {
-		out.append("\t\t");
+		ret = "\t\t" + number;
 	}
+	else {
+		ret = number + "\t\t";
+	}
+	ret += (number.length() > 7) ?  "\t" : "\t\t";
 
-	out.append(number);
-	number.length() > 7 ? out.append("\t") : out.append("\t\t");
-	out.append(dest);
-	out.append("\n");
-
-	return out;
+	return ret;
 }
+
+std::string Call::getDest()
+{
+	if (dest == "")
+		return "\t\t";
+	else return dest;
+}
+
+std::string Call::getDuration()
+{
+	if (duration>0)
+		return std::to_string(duration);
+	else return "";
+}
+
+
