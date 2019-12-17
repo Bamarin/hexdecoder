@@ -4,9 +4,15 @@
 #include "alternread.h"
 
 #define MAIN_L 86
+#define DATA_L 232
 
 #define NAME_OFF 0
 #define TEL_OFF 42
+#define FAX_OFF 187
+#define HOME_OFF 0
+#define WORK_OFF 145
+#define MAIL_OFF 84
+#define ORG_OFF 42
 
 class Contact : public alternread
 {
@@ -22,10 +28,15 @@ class Contact : public alternread
 	bool deleted;
 
 public:
-	Contact(char *record);
+	Contact(char *main, char *detail);
 	~Contact();
 	std::string getName();
 	std::string getNumber();
+	std::string getFax();
+	std::string getHome();
+	std::string getWork();
+	std::string getMail();
+	std::string getOrg();
 	std::string getDel();
 };
 
