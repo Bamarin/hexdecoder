@@ -23,37 +23,60 @@ Contact::~Contact()
 
 std::string Contact::getName()
 {
-	return name;
+	std::string pad;
+	pad = name.length() < 8 ? "\t" : "";
+	return name + pad;
 }
 
 std::string Contact::getNumber()
 {
-	return tel;
+	std::string pad;
+	pad = tel.length() < 8 ? "\t" : "";
+	return tel + pad;
 }
 
 std::string Contact::getFax()
 {
-	return fax;
+	std::string pad;
+	pad = fax.length() < 8 ? "\t" : "";
+	return fax + pad;
 }
 
 std::string Contact::getHome()
 {
-	return home;
+	std::string pad;
+	pad = home.length() < 8 ? "\t" : "";
+	return home + pad;
 }
 
 std::string Contact::getWork()
 {
-	return work;
+	std::string pad;
+	pad = work.length() < 8 ? "\t" : "";
+	return work + pad;
 }
 
 std::string Contact::getMail()
 {
-	return mail;
+	std::string pad="";
+	switch (int(mail.length()/8))
+	{
+	case 0:
+		pad += "\t";
+	case 1:
+		pad += "\t";
+
+	default:
+		break;
+	}
+	return mail + pad;
 }
 
 std::string Contact::getOrg()
 {
-	return org;
+	std::string pad;
+	pad = org.length() < 8 ? "\t" : "";
+	return org + pad;
 }
 
 std::string Contact::getDel()
