@@ -36,8 +36,6 @@ class Contact : public alternread
 
 public:
 	Contact(char *main, char *detail);
-	~Contact();
-
 	std::string getAttr(AttrType attribute);
 };
 

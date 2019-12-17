@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 		txt.close();
 		
 	}
-	else cerr << "Error occurred opening the file\n";
+	else cerr << "Error occurred opening the file Calls.bin" << endl;
 	delete record;
 
 	ifstream p_main("Phonebook_Main.bin", ios::binary);
@@ -46,6 +46,7 @@ int main(int argc, char* argv[])
 
 	if (p_main.is_open())
 	{
+		txt << "Name\t\tTel\t\tFax\t\tHome\t\tWork\t\tEmail\t\t\tOrg\t\tDeleted\n";		//print header
 		while (p_main.read(main_rec, MAIN_L) && p_data.read(data_rec,DATA_L) && main_rec[MAIN_L-1] != 0x00)
 		{
 			contRec = new Contact(main_rec, data_rec);
@@ -64,5 +65,9 @@ int main(int argc, char* argv[])
 		p_data.close();
 		txt.close();
 	}
+	else cerr << "Error occurred opening the file Calls.bin" << endl;
+	delete main_rec;
+	delete data_rec;
+
 	return 0;
 }

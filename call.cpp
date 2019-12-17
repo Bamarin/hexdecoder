@@ -17,9 +17,6 @@ Call::Call(char * record)
 	duration = record[DUR_OFF];
 }
 
-Call::~Call()
-{
-}
 
 std::string Call::getType()
 {

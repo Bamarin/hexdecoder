@@ -33,10 +33,10 @@ class Call : public alternread
 
 public:
 	Call(char * record);
-	~Call();
 	std::string getType();
 	std::string getNumber();
 	std::string getDest();
 	std::string getDuration();
+
 };
 

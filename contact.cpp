@@ -33,9 +33,6 @@ Contact::Contact(char *main, char* detail)
 
 }
 
-Contact::~Contact()
-{
-}
 
 
 std::string Contact::getAttr(AttrType attribute)
