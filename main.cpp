@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include "call.h"
+#include "contact.h"
 
 using namespace std;
 
@@ -20,8 +21,8 @@ int main(int argc, char* argv[])
 		txt << "Type\t\tTel From\tTel To\t\tTo\t\tDuration\n";		//print header
 		while (calls.read(record, LINE_SIZE) && record[0] != 0x00)	//start reading binary
 		{
-			callRec = new Call(record, LINE_SIZE);					//create an object for each record
-			txt << callRec->getType()
+			callRec = new Call(record);					//create an object for each record
+			txt << callRec->getType()					//print it to a file
 				<< callRec->getNumber()
 				<< callRec->getDest()
 				<< callRec->getDuration()
@@ -32,8 +33,24 @@ int main(int argc, char* argv[])
 		calls.close();
 		txt.close();
 		
-		
 	}
 	else cerr << "Error occurred opening the file\n";
+	delete record;
+	record = new char[MAIN_L];
+
+	ifstream p_main("Phonebook_Main.bin", ios::binary);
+	ifstream p_data("Phonebook_Details.bin", ios::binary);
+	txt.open("Phonebook.txt");
+
+	if (p_main.is_open())
+	{
+		while (p_main.read(record, MAIN_L) && record[MAIN_L-1] != 0x00)
+		{
+			txt << record[0] << endl;
+		}
+		p_main.close();
+		p_data.close();
+		txt.close();
+	}
 	return 0;
 }

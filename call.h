@@ -29,10 +29,9 @@ class Call
 	int duration;
 
 	void setRecipient();
-	void typeToString();
 
 public:
-	Call(char * record, int length);
+	Call(char * record);
 	~Call();
 	std::string getType();
 	std::string getNumber();

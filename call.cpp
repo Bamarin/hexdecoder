@@ -11,15 +11,11 @@ void Call::setRecipient()
 	}
 }
 
-void Call::typeToString()
-{
-	
-}
 
-Call::Call(char * record, int length)
+
+Call::Call(char * record)
 {
 	type = (CallType)record[TYPE_OFF];
-	this->typeToString();
 	number = &record[NUM_OFF];
 	to = &record[TO_OFF];
 	this->setRecipient();
