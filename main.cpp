@@ -8,9 +8,8 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	//ios::pos_type size;
 	char *record = new char [LINE_SIZE];
-	call *callRec;
+	Call *callRec;
 	
 	
 
@@ -19,10 +18,10 @@ int main(int argc, char* argv[])
 
 	if (calls.is_open())
 	{
-		txt << "Type\t\tTel From\tTel To\t\tTo\tDuration\n";
+		txt << "Type\t\tTel From\tTel To\t\tTo\t\tDuration\n";
 		while (calls.read(record, LINE_SIZE) && record[0] != 0x00)
 		{
-			callRec = new call(record, LINE_SIZE);
+			callRec = new Call(record, LINE_SIZE);
 			txt << callRec->getRecord();
 			delete callRec;
 		}

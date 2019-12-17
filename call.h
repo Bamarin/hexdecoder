@@ -7,17 +7,30 @@
 #define DUR_OFF 101
 #define TO_OFF 16
 
-class call
+#define DIAL_ENC 0x00
+#define MISS_ENC 0x40
+#define RECV_ENC 0x80
+
+enum class CallType : uint8_t
 {
-	char *num;
-	uint8_t _type;
-	long duration;
+	Dialed = DIAL_ENC,
+	Missed = MISS_ENC,
+	Received = RECV_ENC
+};
+
+class Call
+{
+	CallType type;
+	std::string number;
 	char *to;
-	std::string out;
-	std::string getRecipient();
+	std::string dest;
+	long duration;
+
+	void setRecipient();
+
 public:
-	call(char * record, int length);
-	~call();
+	Call(char * record, int length);
+	~Call();
 	std::string getRecord();
 };
 

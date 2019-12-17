@@ -1,57 +1,55 @@
 #include "call.h"
 
 
-
-
-
-std::string call::getRecipient()
+void Call::setRecipient()
 {
-	std::string out;
 
 	while (*to != 0x00)
 	{
-		out.append(to);
+		dest.append(to);
 		to += 2;
 	}
-	return out;
 }
 
-call::call(char * record, int length)
+Call::Call(char * record, int length)
 {
-	num = &record[NUM_OFF];
-	_type = record[TYPE_OFF];
-	duration = long(&record[DUR_OFF]);
+	type = (CallType)record[TYPE_OFF];
+	number = &record[NUM_OFF];
 	to = &record[TO_OFF];
+	setRecipient();
+	duration = long(&record[DUR_OFF]);
 }
 
-call::~call()
+Call::~Call()
 {
 }
 
-std::string call::getRecord()
+std::string Call::getRecord()
 {
-	switch (_type)
+	std::string out;
+
+	switch (type)
 	{
-	case 0x00:
+	case CallType::Dialed:
 		out.append("Dialed\t\t");
 		break;
-	case 0x80:
+	case CallType::Received:
 		out.append("Received\t");
 		break;
-	case 0x40:
+	case CallType::Missed:
 		out.append("Missed\t\t");
 		break;
 	default:
 		break;
 	}
 
-	if (_type == 0x00) {
+	if (type == CallType::Dialed) {
 		out.append("\t\t");
 	}
 
-	out.append(num);
-	num[7] == 0x00 ? out.append("\t\t") : out.append("\t");
-	out.append(this->getRecipient());
+	out.append(number);
+	number.length() > 7 ? out.append("\t") : out.append("\t\t");
+	out.append(dest);
 	out.append("\n");
 
 	return out;
