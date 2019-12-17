@@ -3,12 +3,7 @@
 
 void Call::setRecipient()
 {
-
-	while (*to != 0x00)
-	{
-		dest.append(to);
-		to += 2;
-	}
+	dest = alt_read(to);
 }
 
 

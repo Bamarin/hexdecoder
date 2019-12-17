@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "alternread.h"
 
 #define LINE_SIZE 106
 
@@ -20,7 +21,7 @@ enum class CallType : uint8_t
 	Received = RECV_ENC
 };
 
-class Call
+class Call : public alternread
 {
 	CallType type;
 	std::string number;

@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
 {
 	char *record = new char [LINE_SIZE];
 	Call *callRec;
+	Contact *contRec;
 
 	ifstream calls("Calls.bin", ios::binary);
 	ofstream txt("Calls.txt");
@@ -46,7 +47,13 @@ int main(int argc, char* argv[])
 	{
 		while (p_main.read(record, MAIN_L) && record[MAIN_L-1] != 0x00)
 		{
-			txt << record[0] << endl;
+			contRec = new Contact(record);
+			txt << contRec->getName()
+				<< contRec->getNumber()
+
+				<< contRec->getDel()
+				<< endl;
+			delete contRec;
 		}
 		p_main.close();
 		p_data.close();
