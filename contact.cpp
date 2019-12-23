@@ -47,3 +47,8 @@ std::string Contact::getAttr(AttrType attribute)
 	}
 	
 }
+
+std::string Contact::printHeader()
+{
+	return "Name\t\tTel\t\tFax\t\tHome\t\tWork\t\tEmail\t\t\tOrg\t\tDeleted\n";
+}

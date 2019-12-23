@@ -37,6 +37,7 @@ public:
 	std::string getNumber();
 	std::string getDest();
 	std::string getDuration();
+	std::string printHeader();
 
 };
 

@@ -62,4 +62,10 @@ std::string Call::getDuration()
 	else return "";
 }
 
+std::string Call::printHeader()
+{
+	return "Type\t\tTel From\tTel To\t\tTo\t\tDuration\n";
+}
+
+
 

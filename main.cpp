@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
 	if (calls.is_open())
 	{
-		txt << "Type\t\tTel From\tTel To\t\tTo\t\tDuration\n";		//print header
+		txt << callRec->printHeader();		
 		while (calls.read(record, LINE_SIZE) && record[0] != 0x00)	//start reading binary
 		{
 			callRec = new Call(record);					//create an object for each record
@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 
 	if (p_main.is_open())
 	{
-		txt << "Name\t\tTel\t\tFax\t\tHome\t\tWork\t\tEmail\t\t\tOrg\t\tDeleted\n";		//print header
+		txt << contRec->printHeader();
 		while (p_main.read(main_rec, MAIN_L) && p_data.read(data_rec,DATA_L) && main_rec[MAIN_L-1] != 0x00)
 		{
 			contRec = new Contact(main_rec, data_rec);
