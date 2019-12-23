@@ -8,13 +8,16 @@ std::string seconds2HMS(int seconds) {	//could be improved with c++20 using form
 	std::chrono::minutes min;
 	std::chrono::hours hours;
 	std::string HMS = "";
-	hours = std::chrono::duration_cast<std::chrono::hours>(sec);
-	HMS += std::to_string(hours.count()) + ":";
-	sec -= hours;
-	min = std::chrono::duration_cast<std::chrono::minutes>(sec);
+	hours = std::chrono::duration_cast<std::chrono::hours>(sec);	//transform seconds into hours
+	HMS += hours.count() < 10 ? "0" : "";
+	HMS += std::to_string(hours.count()) + ":";						//append hours to output string
+	sec -= hours;													//update ramaining reconds
+	min = std::chrono::duration_cast<std::chrono::minutes>(sec);	//repeat for minutes
+	HMS += min.count() < 10 ? "0" : "";
 	HMS += std::to_string(min.count()) + ":";
 	sec -= min;
-	HMS += std::to_string(sec.count());
+	HMS += sec.count() < 10 ? "0" : "";
+	HMS += std::to_string(sec.count());								//finally append ramaining seconds
 	return HMS;
 }
 

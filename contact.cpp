@@ -1,5 +1,6 @@
 #include "contact.h"
 
+//add padding for the output file to have every field under the correct column
 std::string Contact::computePadLength(ContAttr attribute)
 {
 	std::string pad = "";
