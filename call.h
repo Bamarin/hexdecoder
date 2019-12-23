@@ -8,6 +8,7 @@
 #define TYPE_OFF 8
 #define NUM_OFF 58
 #define TO_OFF 16
+#define DATE_OFF 12
 #define DUR_OFF 100
 
 #define DIAL_ENC 0x00
@@ -28,6 +29,7 @@ class Call : public PhoneRecord
 	char *to;
 	std::string dest;
 	int duration;
+	std::string date;
 
 	void setRecipient();
 
@@ -37,6 +39,7 @@ public:
 	std::string getType();
 	std::string getNumber();
 	std::string getDest();
+	std::string getDate();
 	std::string getDuration();
 	std::string printHeader();
 

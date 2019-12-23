@@ -1,4 +1,5 @@
 #include <sstream>  
+#include <ctime>
 #include "call.h"
 
 void Call::setRecipient()
@@ -15,6 +16,8 @@ Call::Call(char * record)
 	to = &record[TO_OFF];
 	this->setRecipient();
 	duration = record[DUR_OFF];
+	time_t start = 0xffffffff;
+	date = ctime(&start);
 }
 
 
@@ -53,6 +56,11 @@ std::string Call::getDest()
 	if (dest == "")
 		return "\t\t";
 	else return dest;
+}
+
+std::string Call::getDate()
+{
+	return date;
 }
 
 std::string Call::getDuration()

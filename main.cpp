@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
 				<< callRec->getNumber()
 				<< callRec->getDest()
 				<< callRec->getDuration()
+				<< callRec->getDate()
 				<< endl;
 			delete callRec;
 		}
