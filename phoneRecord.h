@@ -2,7 +2,7 @@
 
 #include <string>
 
-class alternread
+class PhoneRecord
 {
 protected:
 	static std::string alt_read(char *ptr);

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 #include "call.h"
 #include "contact.h"
 
@@ -13,8 +14,8 @@ int main(int argc, char* argv[])
 	char *record = new char[LINE_SIZE];
 	char *main_rec = new char[MAIN_L];
 	char *data_rec = new char[DATA_L];
-	Call *callRec;
-	Contact *contRec;
+	Call *callRec = new Call();
+	Contact *contRec = new Contact();
 
 	ifstream calls("Calls.bin", ios::binary);
 	ofstream txt("Calls.txt");

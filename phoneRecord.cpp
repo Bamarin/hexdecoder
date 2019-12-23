@@ -1,9 +1,9 @@
-#include "alternread.h"
+#include "phoneRecord.h"
 
 
 
 
-std::string alternread::alt_read(char * ptr)
+std::string PhoneRecord::alt_read(char * ptr)
 {
 	std::string ret;
 	do

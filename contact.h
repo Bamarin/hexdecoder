@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "alternread.h"
+#include "phoneRecord.h"
 
 #define MAIN_L 86
 #define DATA_L 232
@@ -26,7 +26,7 @@ enum class AttrType : uint8_t
 	Deleted
 };
 
-class Contact : public alternread
+class Contact : public PhoneRecord
 {
 	char *record;
 	char *ptr;
@@ -36,6 +36,7 @@ class Contact : public alternread
 
 public:
 	Contact(char *main, char *detail);
+	Contact() {};
 	std::string getAttr(AttrType attribute);
 	std::string printHeader();
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "alternread.h"
+#include "phoneRecord.h"
 
 #define LINE_SIZE 106
 
@@ -21,7 +21,7 @@ enum class CallType : uint8_t
 	Received = RECV_ENC
 };
 
-class Call : public alternread
+class Call : public PhoneRecord
 {
 	CallType type;
 	std::string number;
@@ -33,6 +33,7 @@ class Call : public alternread
 
 public:
 	Call(char * record);
+	Call() {};
 	std::string getType();
 	std::string getNumber();
 	std::string getDest();
