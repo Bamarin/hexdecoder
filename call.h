@@ -21,6 +21,14 @@ enum class CallType : uint8_t
 	Received = RECV_ENC
 };
 
+enum class CallAttr : uint8_t
+{
+	Type = 0,
+	Number,
+	To,
+	Duration
+};
+
 class Call : public PhoneRecord
 {
 	CallType type;
@@ -28,16 +36,19 @@ class Call : public PhoneRecord
 	char *to;
 	std::string dest;
 	int duration;
+	std::string attributes[8];
 
+	std::string getType();
+	std::string getNumber();
+	std::string getDest();
+	std::string getDuration();
 	void setRecipient();
 
 public:
 	Call(char * record);
 	Call() {};
-	std::string getType();
-	std::string getNumber();
-	std::string getDest();
-	std::string getDuration();
+
+	std::string getAttr(CallAttr attribute);
 	std::string printHeader();
 
 };

@@ -26,10 +26,10 @@ int main(int argc, char* argv[])
 		while (calls.read(record, LINE_SIZE) && record[0] != 0x00)	//start reading binary
 		{
 			callRec = new Call(record);					//create an object for each record
-			txt << callRec->getType()					//print it to a file
-				<< callRec->getNumber()
-				<< callRec->getDest()
-				<< callRec->getDuration()
+			txt << callRec->getAttr(CallAttr::Type)					//print it to a file
+				<< callRec->getAttr(CallAttr::Number)
+				<< callRec->getAttr(CallAttr::To)
+				<< callRec->getAttr(CallAttr::Duration)
 				<< endl;
 			delete callRec;
 		}
@@ -51,14 +51,14 @@ int main(int argc, char* argv[])
 		while (p_main.read(main_rec, MAIN_L) && p_data.read(data_rec,DATA_L) && main_rec[MAIN_L-1] != 0x00)
 		{
 			contRec = new Contact(main_rec, data_rec);
-			txt << contRec->getAttr(AttrType::Name)
-				<< contRec->getAttr(AttrType::Tel)
-				<< contRec->getAttr(AttrType::Fax)
-				<< contRec->getAttr(AttrType::Home)
-				<< contRec->getAttr(AttrType::Work)
-				<< contRec->getAttr(AttrType::Email) << "\t"
-				<< contRec->getAttr(AttrType::Org)
-				<< contRec->getAttr(AttrType::Deleted)
+			txt << contRec->getAttr(ContAttr::Name)
+				<< contRec->getAttr(ContAttr::Tel)
+				<< contRec->getAttr(ContAttr::Fax)
+				<< contRec->getAttr(ContAttr::Home)
+				<< contRec->getAttr(ContAttr::Work)
+				<< contRec->getAttr(ContAttr::Email) << "\t"
+				<< contRec->getAttr(ContAttr::Org)
+				<< contRec->getAttr(ContAttr::Deleted)
 				<< endl;
 			delete contRec;
 		}

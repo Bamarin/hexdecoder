@@ -14,7 +14,8 @@
 #define MAIL_OFF 84
 #define ORG_OFF 42
 
-enum class AttrType : uint8_t
+
+enum class ContAttr : uint8_t
 {
 	Name = 0,
 	Tel,
@@ -31,13 +32,12 @@ class Contact : public PhoneRecord
 	char *record;
 	char *ptr;
 	bool deleted;
-	std::string attributes [8];
-	std::string computePadLength(AttrType attribute);
+	std::string attributes[8];
+	std::string computePadLength(ContAttr attribute);
 
 public:
 	Contact(char *main, char *detail);
 	Contact() {};
-	std::string getAttr(AttrType attribute);
+	std::string getAttr(ContAttr attribute);
 	std::string printHeader();
 };
-

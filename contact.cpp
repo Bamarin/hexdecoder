@@ -1,6 +1,6 @@
 #include "contact.h"
 
-std::string Contact::computePadLength(AttrType attribute)
+std::string Contact::computePadLength(ContAttr attribute)
 {
 	std::string pad = "";
 	switch (int(attributes[(int)attribute].length() / 8))
@@ -20,24 +20,24 @@ Contact::Contact(char *main, char* detail)
 {
 	ptr = &main[NAME_OFF];
 	deleted = *ptr == 0x00 ? true : false;
-	attributes[(int)AttrType::Name] = alt_read(ptr);
-	attributes[(int)AttrType::Tel] = &main[TEL_OFF+deleted];
+	attributes[(int)ContAttr::Name] = alt_read(ptr);
+	attributes[(int)ContAttr::Tel] = &main[TEL_OFF+deleted];
 	if (!deleted) {
-		attributes[(int)AttrType::Home] = &detail[HOME_OFF];
+		attributes[(int)ContAttr::Home] = &detail[HOME_OFF];
 		ptr = &detail[ORG_OFF];
-		attributes[(int)AttrType::Org] = alt_read(ptr);
-		attributes[(int)AttrType::Email] = &detail[MAIL_OFF];
-		attributes[(int)AttrType::Work] = &detail[WORK_OFF];
-		attributes[(int)AttrType::Fax] = &detail[FAX_OFF];
+		attributes[(int)ContAttr::Org] = alt_read(ptr);
+		attributes[(int)ContAttr::Email] = &detail[MAIL_OFF];
+		attributes[(int)ContAttr::Work] = &detail[WORK_OFF];
+		attributes[(int)ContAttr::Fax] = &detail[FAX_OFF];
 	}
 
 }
 
 
 
-std::string Contact::getAttr(AttrType attribute)
+std::string Contact::getAttr(ContAttr attribute)
 {
-	if (attribute == AttrType::Deleted) {
+	if (attribute == ContAttr::Deleted) {
 		return deleted ? "Yes" : "";
 	}
 	else

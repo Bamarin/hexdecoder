@@ -7,17 +7,6 @@ void Call::setRecipient()
 }
 
 
-
-Call::Call(char * record)
-{
-	type = (CallType)record[TYPE_OFF];
-	number = &record[NUM_OFF];
-	to = &record[TO_OFF];
-	this->setRecipient();
-	duration = record[DUR_OFF];
-}
-
-
 std::string Call::getType()
 {
 	switch (this->type)
@@ -60,6 +49,32 @@ std::string Call::getDuration()
 	if (duration>0)
 		return std::to_string(duration);
 	else return "";
+}
+
+Call::Call(char * record)
+{
+	type = (CallType)record[TYPE_OFF];
+	number = &record[NUM_OFF];
+	to = &record[TO_OFF];
+	this->setRecipient();
+	duration = record[DUR_OFF];
+}
+
+std::string Call::getAttr(CallAttr attribute)
+{
+	switch (attribute)
+	{
+	case CallAttr::Type:
+		return this->getType();
+	case CallAttr::Number:
+		return this->getNumber();
+	case CallAttr::To:
+		return this->getDest();
+	case CallAttr::Duration:
+		return this->getDuration();
+	default:
+		break;
+	}
 }
 
 std::string Call::printHeader()
