@@ -1,5 +1,22 @@
 #include <sstream>  
+#include <iostream>
+#include <chrono>
 #include "call.h"
+
+std::string seconds2HMS(int seconds) {	//could be improved with c++20 using formatter
+	std::chrono::seconds sec(seconds);
+	std::chrono::minutes min;
+	std::chrono::hours hours;
+	std::string HMS = "";
+	hours = std::chrono::duration_cast<std::chrono::hours>(sec);
+	HMS += std::to_string(hours.count()) + ":";
+	sec -= hours;
+	min = std::chrono::duration_cast<std::chrono::minutes>(sec);
+	HMS += std::to_string(min.count()) + ":";
+	sec -= min;
+	HMS += std::to_string(sec.count());
+	return HMS;
+}
 
 void Call::setRecipient()
 {
@@ -47,7 +64,7 @@ std::string Call::getDest()
 std::string Call::getDuration()
 {
 	if (duration>0)
-		return std::to_string(duration);
+		return seconds2HMS(duration);
 	else return "";
 }
 
